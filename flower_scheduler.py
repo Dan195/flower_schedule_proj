@@ -12,7 +12,7 @@ SUNDAY = 6
 
 
 class Schedule():
-    def __init__(self,file_name="Apprentice_WeGrowInTandem_Data.json",weeks=12):
+    def __init__(self,file_name="WeGrow_Data.json",weeks=12):
         json_flowers = []
         self.scheduler = {}
         with open(file_name) as file:
@@ -20,7 +20,6 @@ class Schedule():
         for flower in json_flowers:
             self.scheduler[flower[NAME]] = {WATER_AFTER:flower[WATER_AFTER]}
             self.scheduler[flower[NAME]][FUTURE_SCHEDULE] = self.generate_water_schedule(flower, weeks)
-        print(self.scheduler)
             
     def generate_water_schedule(self,flower,weeks):
         schedule_exists = FUTURE_SCHEDULE in flower
@@ -56,8 +55,8 @@ class Schedule():
 
 
     def to_json(self,file_name):
-              with open(file_name+'.json', 'w') as file:
-                  json.dump(self.scheduler,file)
+        with open(file_name+'.json', 'w') as file:
+            json.dump(self.scheduler,file)
 
     def str_to_date(self,date):
         return dt.datetime.strptime(date,"%B %d, %Y")
